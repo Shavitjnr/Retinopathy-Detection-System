@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health AI - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        .loader { display: none; }
+        .progress-container { width: 100%; background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; overflow: hidden; margin-top: 2rem; }
+        .progress-bar { height: 100%; transition: width 1s ease; }
+        .confidence-label { text-align: right; font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <a href="/logout" class="btn logout-btn">Logout</a>
+    
+    <div class="container">
+        <div class="glass-card">
+            <div class="dashboard-grid">
+                <!-- Input Section -->
+                <div class="input-section">
+                    <h2>Patient Analysis</h2>
+                    <p class="subtitle">Enter clinical parameters for AI assessment</p>
+                    
+                    <form id="predictionForm">
+                        <div class="input-grid">
+                            <div class="form-group">
+                                <label>Pregnancies</label>
+                                <input type="number" name="pregnancies" step="1" min="0" value="0" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Glucose Level</label>
+                                <input type="number" name="glucose" step="1" min="0" value="100" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Blood Pressure</label>
+                                <input type="number" name="bp" step="1" min="0" value="70" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Skin Thickness (mm)</label>
+                                <input type="number" name="skin" step="1" min="0" value="20" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Insulin (mu U/ml)</label>
+                                <input type="number" name="insulin" step="1" min="0" value="79" required>
+                            </div>
+                            <div class="form-group">
+                                <label>BMI</label>
+                                <input type="number" name="bmi" step="0.1" min="0" value="25.0" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Diabetes Pedigree Function</label>
+                                <input type="number" name="dpf" step="0.001" min="0" value="0.5" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Age (years)</label>
+                                <input type="number" name="age" step="1" min="0" value="30" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn">Analyze Risk <span id="loader" class="loading loader"></span></button>
+                    </form>
+                </div>
+
+                <!-- Result Section -->
+                <div class="result-section" id="resultSection">
+                    <div class="result-card">
+                        <h2>Assessment Result</h2>
+                        <div id="riskIndicator" class="risk-indicator"></div>
+                        <p id="riskDescription"></p>
+                        
+                        <div class="progress-container">
+                            <div id="confidenceBar" class="progress-bar"></div>
+                        </div>
+                        <p class="confidence-label">AI Confidence Score</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
