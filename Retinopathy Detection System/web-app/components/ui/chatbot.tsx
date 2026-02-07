@@ -75,7 +75,8 @@ export function Chatbot({ isOpenExternal, onToggle }: ChatbotProps) {
       console.log('Chat API Response Status:', response.status);
 
       if (!response.ok) {
-        throw new Error('Failed to fetch response');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to fetch response');
       }
       
       const responseText = await response.text();
@@ -87,12 +88,12 @@ export function Chatbot({ isOpenExternal, onToggle }: ChatbotProps) {
       };
       
       setMessages(prev => [...prev, assistantMessage]);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Chat error:", error);
       setMessages(prev => [...prev, { 
           id: Date.now().toString(), 
           role: 'assistant', 
-          content: "Sorry, I'm having trouble connecting right now. Please try again later." 
+          content: error.message || "Sorry, I'm having trouble connecting right now. Please try again later." 
       }]);
     } finally {
       setIsLoading(false);

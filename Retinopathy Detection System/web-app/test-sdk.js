@@ -23,7 +23,7 @@ async function testSDK() {
             console.log("Available generation models:", listData.models.filter(m => m.supportedGenerationMethods.includes('generateContent')).map(m => m.name));
         }
 
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         console.log("Model initialized.");
         
         console.log("Sending message...");

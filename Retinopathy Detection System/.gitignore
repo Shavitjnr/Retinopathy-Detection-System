@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Model weights (Large files)
+*.pth
+retinopathy_model.pth
+
+# Datasets (Large folders)
+archive/
+aptos_dataset/
+sample_dataset/
+
+# Next.js
+web-app/.next/
+web-app/node_modules/
+web-app/.env.local
+
+# Build logs
+web-app/build_log.txt
+
+# OS files
+.DS_Store
+Thumbs.db
